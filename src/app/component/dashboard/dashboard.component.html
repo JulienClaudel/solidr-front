@@ -1,0 +1,65 @@
+<!-- <app-spinner></app-spinner> -->
+
+<!-- Live Candlesticks -->
+<div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px grid" fxLayoutAlign="start stretch">
+  <app-tradecandle fxFlex="1 0 auto" fxFill></app-tradecandle>
+</div>
+<!-- /Live Candlesticks -->
+
+<div class="grid-container">
+  <mat-grid-list cols="2" rowHeight="300px">
+
+    <!-- Follow this angel -->
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card" fxLayout="row">
+        <mat-card-content class="dashboard-card-content">
+          <a routerLink="/marketPlace" [routerLinkActive]="'is-active'" fxFill>
+            <img src="assets/img/advertising/Banner_05_1200x628.jpg" alt="banner follow an angel" fxFlex="1 0 auto" fxFill>
+          </a>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <!-- /Follow this angel -->
+
+    <!-- Wallet -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Your wallet
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div id="containerwallet">
+            <div class="walletarea">
+              <app-wallet></app-wallet>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <!-- Wallet -->
+
+    <!-- Become an angel -->
+    <mat-grid-tile
+      [colspan]="1"
+      [rowspan]="1">
+      <mat-card class="dashboard-card" fxLayout="row">
+        <mat-card-content class="dashboard-card-content">
+          <a routerLink="/marketPlace" [routerLinkActive]="'is-active'" fxFill>
+            <img src="assets/img/advertising/Banner_06_1200x628.jpg" alt="banner follow an angel" fxFlex="1 0 auto" fxFill>
+          </a>
+          </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <!-- /Become an angel -->
+
+  </mat-grid-list>
+</div>

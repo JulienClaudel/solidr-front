@@ -1,0 +1,70 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxLayoutGap="30px">
+  <mat-card class="strategy-details-card" layout-xs="column" layout="row">
+    <!-- ----------- HEADER ----------- -->
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between start">
+      <!--  AVATAR  -->
+      <mat-icon mat-card-avatar color="primary">api</mat-icon>
+      <div fxFlex="grow">
+        <!--  LEFT INFORMATIONS  -->
+        <mat-card-title-group fxFlex="auto">
+          <mat-card-title>{{strategy.strategyLabel}}</mat-card-title>
+          <mat-card-subtitle>{{strategy.userEmail}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <!--  RIGHT INFORMATIONS  -->
+        <mat-card-title-group class="alignHeaderRightText">
+          <mat-card-title fxFlexAlign="end" class="symbol">{{strategy.strategySymbol1}}
+            /{{strategy.strategySymbol2}}</mat-card-title>
+          <mat-card-subtitle>{{strategy.strategyProfitability}}% last month</mat-card-subtitle>
+        </mat-card-title-group>
+      </div>
+    </mat-card-header>
+    <!-- ----------- /HEADER ----------- -->
+    <mat-divider></mat-divider>
+    <!-- ----------- CONTENT ----------- -->
+    <mat-card-content>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="10px grid">
+        <img mat-card-image fxFlex="grow" alt="strategy image" fxFill
+             src="../../../../assets/img/strategy/Img_{{strategy.strategyIcon}}.jpg"
+             id="myPicture">
+        <div fxLayout="column" fxFlexAlign="start end" class="alignHeaderRightText">
+          <p *ngIf="follower <= 1; else moreFollowers">{{follower}} follower</p>
+          <ng-template #moreFollowers><p>{{follower}} followers</p></ng-template>
+          <div fxFlex="grow" fxFlexAlign="stretch" class="alignDescriptionText" fxFill>
+            <span>{{strategy.strategyDescription}}</span>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <p>Creation date: {{strategy.strategyCreationDate | date: 'dd-MM-yyy'}}</p>
+        <p>Last update: {{strategy.strategyUpdateDate | date: 'dd-MM-yyy'}}</p>
+      </div>
+    </mat-card-content>
+    <!-- ----------- /CONTENT ----------- -->
+
+    <section *ngIf="isMember">
+      <mat-divider></mat-divider>
+
+      <!-- ----------- ACTIONS ----------- -->
+      <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" (click)="becomeFollower(strategy)">Follow this ANGEL</button>
+        <button mat-raised-button color="primary" (click)="backToMarketPlace()">
+          Back to the Marketplace
+        </button>
+        <div *ngIf="isExpert">
+          <button mat-mini-fab color="primary" (click)="onEdit(strategy)">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+      <!-- ----------- /ACTIONS ----------- -->
+    </section>
+  </mat-card>
+
+  <app-comment-create fxFlex [strategy]="strategy"></app-comment-create>
+</div>
+<h4>Comments</h4>
+<app-comment [strategy]="strategy"></app-comment>
+

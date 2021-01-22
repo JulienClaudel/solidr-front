@@ -1,0 +1,110 @@
+<!-- Admin update information of the user selected -->
+<div class="profile-update-card">
+  <form [formGroup]="updateForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Modify user informations</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+
+      <!-- Username -->
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input name="userUsername" matInput formControlName="userUsername" [(ngModel)]="userData.userUsername">
+        <mat-error *ngIf="updateForm.controls['userUsername'].hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userUsername'].hasError('minlength')">
+          Username is <strong>too short</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userUsername'].hasError('maxlength')">
+          Username is <strong>too long</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / Username -->
+
+      <!-- First name -->
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input name="userFirstname" matInput formControlName="userFirstname" [(ngModel)]="userData.userFirstname">
+        <mat-error *ngIf="updateForm.controls['userFirstname'].hasError('required')">
+          First name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userFirstname'].hasError('minlength')">
+          First name is <strong>too short</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userFirstname'].hasError('maxlength')">
+          First name is <strong>too long</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / First name -->
+
+      <!-- Last name -->
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input name="userLastname" matInput formControlName="userLastname" [(ngModel)]="userData.userLastname">
+        <mat-error *ngIf="updateForm.controls['userLastname'].hasError('required')">
+          Last name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userLastname'].hasError('minlength')">
+          Last name is <strong>too short</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userLastname'].hasError('maxlength')">
+          Last name is <strong>too long</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / Last name -->
+
+      <!-- Birthdate -->
+      <mat-form-field appearance="fill">
+        <mat-label>Birthdate</mat-label>
+        <input matInput [matDatepicker]="birthdate" name="userBirthdate" [(ngModel)]="userData.userBirthdate"
+               [ngModelOptions]="{standalone: true}" disabled [min]="minDate" [max]="maxDate">
+        <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
+        <mat-datepicker #birthdate startView="multi-year" [startAt]="start" disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <!-- / Birthdate -->
+
+      <!-- / Link Contact -->
+      <mat-form-field appearance="fill">
+        <mat-label>Link Contact</mat-label>
+        <input name="userLinkContact" matInput formControlName="userLinkContact" placeholder="abc@example.com"
+               [(ngModel)]="userData.userLinkContact">
+        <mat-error *ngIf="updateForm.controls['userLastname'].hasError('required')">
+          Last name is <strong>too long</strong>
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userLinkContact'].hasError('email')">
+          Not a <strong>valid</strong> link contact
+        </mat-error>
+        <mat-error *ngIf="updateForm.controls['userLinkContact'].hasError('maxlength')">
+          Link contact is <strong>too long</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / Link Contact -->
+
+      <!-- Description -->
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea name="userDescription"
+                  type="text"
+                  formControlName="userDescription"
+                  matInput
+                  cdkTextareaAutosize
+                  [(ngModel)]="userData.userDescription"
+                  maxlength="500">
+        </textarea>
+        <mat-error *ngIf="updateForm.controls['userDescription'].hasError('required')">
+          Description is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / Description -->
+    </mat-card-content>
+
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">Modify user</button>
+    </mat-card-actions>
+
+    <mat-error *ngIf="isUpdateFailed">
+      Modification failed !<br/> {{ errorMessage }}
+    </mat-error>
+  </form>
+</div>

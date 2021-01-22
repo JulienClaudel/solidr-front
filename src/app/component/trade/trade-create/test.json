@@ -1,0 +1,49 @@
+{
+  "headers": {
+    "normalizedNames": {},
+    "lazyUpdate": null
+  },
+  "status": 500,
+  "statusText": "OK",
+  "url": "http://localhost:8080/solidr/api/trades/trade/BTCUSDT/GTC/0.01/9000",
+  "ok": false,
+  "name": "HttpErrorResponse",
+  "message": "Http failure response for http://localhost:8080/solidr/api/trades/trade/BTCUSDT/GTC/0.01/9000: 500 OK",
+  "error": {
+    "timestamp": "2020-11-26T15:16:22.233+00:00",
+    "message": "Account has insufficient balance for requested action.",
+    "details": "uri=/solidr/api/trades/trade/BTCUSDT/GTC/0.01/9000"
+  }
+}
+
+{
+  "symbol": "BTCUSDT",
+  "orderId": 8038,
+  "orderListId": -1,
+  "clientOrderId": "my_order_id_1",
+  "transactTime": 1606846681267,
+  "price": "9000.00000000",
+  "origQty": "0.01000000",
+  "executedQty": "0.01000000",
+  "cummulativeQuoteQty": "185.00000000",
+  "status": "FILLED",
+  "timeInForce": "GTC",
+  "type": "LIMIT",
+  "side": "SELL",
+  "fills": [
+    {
+      "price": "18500.00000000",
+      "qty": "0.00900000",
+      "commission": "0.00000000",
+      "commissionAsset": "USDT",
+      "tradeId": 48
+    },
+    {
+      "price": "18500.00000000",
+      "qty": "0.00100000",
+      "commission": "0.00000000",
+      "commissionAsset": "USDT",
+      "tradeId": 49
+    }
+  ]
+}

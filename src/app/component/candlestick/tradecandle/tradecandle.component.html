@@ -1,0 +1,43 @@
+<mat-card class="flex-container">
+  <div fxLayout="row">
+
+
+    <form fxLayoutAlign="start stretch"  #createStrat="ngForm">
+      <!-- pairs -->
+      <mat-form-field appearance="fill" fxFlex="grow" >
+        <mat-select name="chartPair" [(ngModel)]="symbol" (ngModelChange)="changeChart()">
+          <mat-option *ngFor="let pair of pairs" [value]="pair.value">
+            {{pair.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- /pairs -->
+      <!-- minutes -->
+      <mat-form-field appearance="fill" fxFlex="grow" >
+        <mat-select placeholder="15m" name="chartMinute" [(ngModel)]="interval" (ngModelChange)="changeChart()">
+          <mat-option *ngFor="let minute of minutes" [value]="minute.value">
+            {{minute.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- /minutes -->
+      <!-- hours -->
+      <mat-form-field appearance="fill" fxFlex="grow" >
+        <mat-select placeholder="1h" name="chartHour" [(ngModel)]="interval" (ngModelChange)="changeChart()">
+          <mat-option *ngFor="let hour of hours" [value]="hour.value">
+            {{hour.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- /hours -->
+      <!-- week & month -->
+      <button mat-raised-button name="chartWeek" ngDefaultControl  [(ngModel)]="interval" (click)="changeWeekBtn()">W</button>
+      <button mat-raised-button name="chartMonth" ngDefaultControl [(ngModel)]="interval" (click)="changeMonthBtn()">M</button>
+      <!-- week & month -->
+    </form>
+  </div>
+  <mat-card-content fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="end stretch" fxFill>
+    <div id="chart" fxLayoutAlign="end stretch" fxFlex="grow" fxFill></div>
+    <app-trademacd fxLayoutAlign="end stretch" fxFlex="grow" fxFill></app-trademacd>
+  </mat-card-content>
+</mat-card>

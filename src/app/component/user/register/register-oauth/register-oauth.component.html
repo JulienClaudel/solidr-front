@@ -1,0 +1,41 @@
+<form #form="ngForm" *ngIf="!auth" (ngSubmit)="form.valid && verifyCode(code.value)" novalidate>
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Sign Up: Setup and verify Two-Step Authentication</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <mat-hint>Open or scan the following link with your Authenticator app</mat-hint>
+      <br>
+      <a fxLayoutAlign="center" [href]="qrSafeLink"><img [src]="qrCode"></a>
+      <br>
+      <mat-hint>Enter the 6-digit code from your authenticator app :</mat-hint>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Code</mat-label>
+        <input matInput id="code" name="code" #code="ngModel" ngModel autofocus minlength="6" maxlength="6" pInputText
+               pKeyFilter="pint" required>
+        <mat-error *ngIf="form.submitted && code.invalid">
+          <span *ngIf="code.errors?.required">Code is mandatory</span>
+          <span *ngIf="code.errors?.minlength">Code must be exactly 6 digits</span>
+          <span *ngIf="code.errors?.maxlength">Code must be exactly 6 digits</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="qr">
+        {{ errorMessage }}
+      </mat-error>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button pButton color="primary" type="submit">Verify</button>
+    </mat-card-actions>
+  </form>
+<div *ngIf="auth">
+  <mat-card-header fxLayoutAlign="center">
+    <mat-card-title>Your registration is successful !</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="center">
+    <mat-label fxLayoutAlign="center">Before having access to your account,</mat-label>
+    <mat-label fxLayoutAlign="center">we sent you a : <strong>confirmation email !</strong></mat-label>
+    <mat-label fxLayoutAlign="center">Please click on it to complete the registration.</mat-label>
+    <mat-label fxLayoutAlign="center">Thank you</mat-label>
+  </mat-card-content>
+</div>
+

@@ -1,0 +1,61 @@
+<div class="container profile-details" *ngIf="currentUser; else loggedOut">
+  <header class="jumbotron">
+    <mat-card-actions >
+      <button *ngIf="enabled && status" mat-raised-button color="primary" (click)="goToUpdateProfile(currentUser.email)">Modify your informations</button>
+      <button *ngIf="enabled && !status" mat-raised-button color="accent" (click)="goToAddInformations(currentUser.email)">Add your informations</button>
+      <button *ngIf="!enabled" mat-raised-button color="warn" (click)="verifyAccount(currentUser.email)">Activate your account</button>
+      <button *ngIf="using2FA" mat-raised-button color="primary" (click)="deactivate2FA()">Deactivate 2FA</button>
+      <button *ngIf="!using2FA" mat-raised-button color="warn" (click)="activate2FA()">Activate 2FA</button>
+      <button mat-raised-button color="warn" (click)="closeAccount()">Close your account</button>
+      <p>
+        <strong>Inscription Date : </strong>
+        {{signIn}}
+      </p>
+    </mat-card-actions>
+    <h3>
+      <strong>{{ userData.userUsername }}</strong> Profile
+    </h3>
+  </header>
+  <p *ngIf="userData.userBirthdate">
+    <strong>Birthdate : </strong>
+    {{ birthdate}}
+  </p>
+  <p *ngIf="userData.userGaz">
+    <strong>Quantity of gaz : </strong>
+    {{ userData.userGaz}} gaz
+  </p>
+  <p *ngIf="!userData.userGaz">
+    <strong>Quantity of gaz : </strong>
+    0 gaz
+  </p>
+  <p>
+    <strong>Email :</strong>
+    {{ userData.userEmail }}
+  </p>
+  <p *ngIf="userData.userFirstname">
+    <strong>First Name :</strong>
+    {{ userData.userFirstname}}
+  </p>
+  <p *ngIf="userData.userLastname">
+    <strong>Last Name :</strong>
+    {{ userData.userLastname}}
+  </p>
+  <p *ngIf="userData.userDescription">
+    <strong>Description :</strong>
+    {{ userData.userDescription}}
+  </p>
+  <p *ngIf="userData.userLinkContact">
+    <strong>Link Contact :</strong>
+    {{ userData.userLinkContact}}
+  </p>
+  <strong>Roles:</strong>
+  <ul>
+    <li *ngFor="let role of currentUser.roles">
+      {{ role }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

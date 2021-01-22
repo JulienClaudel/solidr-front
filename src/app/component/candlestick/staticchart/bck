@@ -1,0 +1,87 @@
+import { Component, OnInit } from '@angular/core';
+import {createChart, CrosshairMode} from 'lightweight-charts';
+
+
+@Component({
+  selector: 'app-staticchart',
+  templateUrl: './staticchart.component.html',
+  styleUrls: ['./staticchart.component.css']
+})
+export class StaticchartComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+    const binanceSocket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@kline_5m');
+
+    const chart = createChart(document.getElementById('chart'), {
+      localization: {
+        locale: 'fr-FR',
+        dateFormat: 'yyyy/MM/dd',
+      },
+      height: 300,
+      layout: {
+        backgroundColor: '#000000',
+        textColor: 'rgba(255, 255, 255, 0.9)',
+      },
+      grid: {
+        vertLines: {
+          color: 'rgba(197, 203, 206, 0.5)',
+        },
+        horzLines: {
+          color: 'rgba(197, 203, 206, 0.5)',
+        },
+      },
+      crosshair: {
+        mode: CrosshairMode.Normal,
+      },
+      rightPriceScale: {
+        borderColor: 'rgba(197, 203, 206, 0.8)',
+      },
+      timeScale: {
+        borderColor: 'rgba(197, 203, 206, 0.8)',
+        timeVisible: true,
+        secondsVisible: false,
+      },
+    });
+
+    const candleSeries = chart.addCandlestickSeries({
+      upColor: 'rgba(255, 144, 0, 1)',
+      downColor: '#000',
+      borderDownColor: 'rgba(255, 144, 0, 1)',
+      borderUpColor: 'rgba(255, 144, 0, 1)',
+      wickDownColor: 'rgba(255, 144, 0, 1)',
+      wickUpColor: 'rgba(255, 144, 0, 1)',
+    });
+
+    const tradeDive = document.getElementById('divstaticchart');
+    binanceSocket.onmessage = event => {
+      console.log(event.data);
+      const msgObject = JSON.parse(event.data);
+
+      /*
+      * Transform unixstamp to Time Methode
+      * works: look at the consol
+       */
+      const datetrade = Math.floor(msgObject.E / 1000);
+      const date2 = new Date(datetrade);
+
+      // Hours part from the timestamp
+      const hours = date2.getHours();
+      // Minutes part from the timestamp
+      const minutes = '0' + date2.getMinutes();
+      // Seconds part from the timestamp
+      const seconds = '0' + date2.getSeconds();
+
+      // Will display time in 10:30:23 format
+      const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+      tradeDive.append(msgObject.e);
+      console.log(datetrade, '\n');
+
+      // Remplacer par datetrade qui fonctionne
+      candleSeries.setData([
+        { time: msgObject.E , open: msgObject.k.o, high: msgObject.k.h, low: msgObject.k.l, close: msgObject.k.c}]);
+    };
+  }
+}

@@ -1,0 +1,66 @@
+<div class="strategy-update-card" layout-xs="column" layout="row">
+  <form #subscribeStrat="ngForm" (ngSubmit)="onSubmit(subscribeStrat)">
+    <!-- ----------- HEADER ----------- -->
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Follow this angel</mat-card-title>
+    </mat-card-header>
+    <!-- ----------- /HEADER ----------- -->
+    <mat-divider></mat-divider>
+    <!-- ----------- CONTENT ----------- -->
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch">
+        <!--  STRATEGY NAME  -->
+        <mat-form-field appearance="outline" class="alignContent">
+          <input matInput name="stratLabel" [value]="strategy.strategyLabel" readonly>
+        </mat-form-field>
+
+        <!--  PLATFORM  -->
+        <mat-form-field appearance="outline" class="alignContent">
+          <input matInput class="" name="platform" value="Binance" readonly>
+        </mat-form-field>
+      </div>
+
+      <!--  SELECTED SYMBOLS OF THE STRATEGY  -->
+      <mat-form-field appearance="outline" class="alignContent">
+        <input matInput name="selectedSymbols"
+               value="Selected symbols: {{strategy.strategySymbol1}}/{{strategy.strategySymbol2}}" readonly>
+      </mat-form-field>
+
+      <!--  AMOUNT AFFECT 1  -->
+      <div fxLayout="row" fxLayoutAlign="center stretch">
+        <mat-form-field appearance="fill">
+          <input matInput type="number" name="amountAffect1" focused placeholder="Amount" class="alignRightContent"
+                 [(ngModel)]="userSubscribeStrat.amountAffect1"
+                 required
+                 #amount1Label=ngModel>
+          <mat-error *ngIf="amount1Label.hasError('required')">Field must not be empty.</mat-error>
+        </mat-form-field>
+        <button mat-flat-button disabled>{{strategy.strategySymbol1}}</button>
+      </div>
+
+      <!--  AMOUNT AFFECT 2  -->
+      <div fxLayout="row" fxLayoutAlign="center stretch">
+        <mat-form-field appearance="fill">
+          <input matInput type="number" name="amountAffect2" placeholder="Amount" class="alignRightContent"
+                 [(ngModel)]="userSubscribeStrat.amountAffect2">
+        </mat-form-field>
+        <button mat-flat-button disabled>{{strategy.strategySymbol2}}</button>
+      </div>
+
+
+    </mat-card-content>
+    <!-- ----------- /CONTENT ----------- -->
+
+    <!-- ----------- ACTIONS ----------- -->
+    <mat-card-actions fxLayoutAlign="center">
+      <button type="submit" color="accent" mat-raised-button [disabled]="subscribeStrat.invalid"
+              (click)="openDialog()">
+        Follow
+      </button>
+      <button type="submit" color="primary" mat-raised-button (click)="onClose()">Cancel</button>
+    </mat-card-actions>
+    <!-- ----------- /ACTIONS ----------- -->
+  </form>
+</div>
+

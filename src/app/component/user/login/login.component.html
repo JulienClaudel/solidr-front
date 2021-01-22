@@ -1,0 +1,72 @@
+<div class="login" fxLayoutAlign="center">
+<mat-card>
+  <form [formGroup]="loginForm" *ngIf="!isLoggedIn" novalidate (ngSubmit)="onSubmit()">
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Log In</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+
+      <!-- Email -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" maxlength="60" placeholder="abc@example.com" [(ngModel)]="form.email" tabindex="1">
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+          Not a <strong>valid</strong> email
+        </mat-error>
+      </mat-form-field>
+      <!-- / Email -->
+
+      <!-- Password -->
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput formControlName="password" type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="form.password" tabindex="2">
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
+          Password is <strong>too short</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- / Password -->
+
+      <!-- Link Forgot Password-->
+      <mat-hint><a href="javascript:void(0);" (click)="forgotPassword()">Forgot Your Password ?</a></mat-hint>
+      <!-- / Link Forgot Password-->
+
+    </mat-card-content>
+
+    <!-- Captcha -->
+    <div fxLayoutAlign="center" appRecaptchaLogin *ngIf="loginForm.valid" (recaptchaSuccess)="onRecaptchaSuccess($event)" tabindex="3"></div>
+    <!-- / Captcha -->
+    <br>
+
+    <!-- Login Button -->
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!captcha || loginForm.invalid" tabindex="4">Log In</button>
+    </mat-card-actions>
+    <!-- / Login Button -->
+
+    <!-- Link Create Account-->
+    <mat-hint fxLayoutAlign="center"><a href="javascript:void(0);" (click)="newAccount()">Create your Solidr Account ?</a></mat-hint>
+    <!-- / Link Create Account-->
+
+    <!-- Error Login Failed -->
+    <mat-error *ngIf="isLoginFailed">
+      Login failed !<br/> {{ errorMessage }}
+    </mat-error>
+    <!-- / Error Login Failed -->
+
+    <!-- Success message -->
+    <mat-error *ngIf="close">
+      <br> {{ errorMessage }}
+    </mat-error>
+    <!-- / Success message -->
+  </form>
+</mat-card>
+</div>

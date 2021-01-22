@@ -1,0 +1,48 @@
+<mat-nav-list>
+  <div class="profile-card" *ngIf="isLoggedIn">
+
+    <div class="header">
+      <h2>{{currentUser.username}}</h2>
+      <a routerLink="/detailsProfile" [routerLinkActive]="'is-active'">
+        <img src="http://i.pravatar.cc/300" alt="profile picture">
+      </a>
+      <h4>{{profil}} <mat-icon color="accent" *ngIf="status" >star_rate</mat-icon></h4>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <mat-list-item>
+    <a routerLink="/" (click)="goToDashboard()" [routerLinkActive]="'is-active'">
+      <button class="menu-item" mat-flat-button>
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+    </a>
+  </mat-list-item>
+  <mat-list-item>
+    <a routerLink="/marketPlace" [routerLinkActive]="'is-active'">
+      <button class="menu-item" mat-flat-button>
+        <mat-icon>psychology</mat-icon>
+        Marketplace
+      </button>
+    </a>
+  </mat-list-item>
+  <mat-list-item>
+    <a routerLink="/trade" (click)="goToTrade()"  [routerLinkActive]="'is-active'">
+      <button class="menu-item" mat-flat-button>
+        <mat-icon>leaderboard</mat-icon>
+        Trading room
+      </button>
+    </a>
+  </mat-list-item>
+  <mat-list-item>
+    <a routerLink="/gas" [routerLinkActive]="'is-active'">
+      <button class="menu-item" mat-flat-button>
+        <mat-icon>local_gas_station</mat-icon>
+        Buy SLDR
+      </button>
+    </a>
+  </mat-list-item>
+
+  <mat-divider></mat-divider>
+</mat-nav-list>

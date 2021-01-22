@@ -1,0 +1,19 @@
+<div *ngIf="!emailSend">
+  <mat-card-header fxLayoutAlign="center">
+    <mat-card-title>Activate your account !</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="center">
+    <mat-label fxLayoutAlign="center">To see more details please activate your account</mat-label>
+    <mat-label fxLayoutAlign="center">Click to send a confirmation email</mat-label>
+    <mat-label fxLayoutAlign="center">Thank you</mat-label>
+    <mat-card-actions fxLayoutAlign="center">
+      <button type="submit" color="warn" mat-raised-button (click)="verifyAccount()">Confirmation email</button>
+      <button type="submit" color="primary" mat-raised-button (click)="onClose()">Cancel</button>
+    </mat-card-actions>
+  </mat-card-content>
+</div>
+<div *ngIf="emailSend">
+  <mat-card-header fxLayoutAlign="center">
+    <mat-card-title>A confirmation has been sent to your Email !</mat-card-title>
+  </mat-card-header>
+</div>

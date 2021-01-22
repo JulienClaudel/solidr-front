@@ -1,0 +1,48 @@
+.strategy-details-card {
+  max-width: 800px;
+  max-height: 600px;
+  text-transform: lowercase;
+}
+
+mat-icon.mat-card-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.alignHeaderRightText {
+  text-align: end;
+}
+
+.alignDescriptionText {
+  text-align: justify;
+  margin-bottom: 10px;
+  overflow-wrap: normal;
+}
+
+.symbol {
+  text-transform: uppercase;
+  font-size: medium;
+  margin-top: 5px;
+}
+
+mat-card-actions {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+img {
+  margin-right: 10px;
+  margin-top: 0 !important;
+}
+
+mat-divider {
+  position: initial !important;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+
+p {
+  margin-top: 0px;
+}

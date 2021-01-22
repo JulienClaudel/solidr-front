@@ -1,0 +1,20 @@
+mat-card {
+  max-width: 400px;
+}
+
+mat-card-header {
+  text-align: center;
+}
+
+mat-hint {
+  text-align: end;
+}
+
+textarea:invalid :valid {
+  height: 10em;
+}
+
+textarea:focus {
+  height: 10em;
+}
+

@@ -1,0 +1,102 @@
+<mat-card class="flex-container">
+
+  <form #createTrade="ngForm" (ngSubmit)="onSubmit(createTrade)">
+    <!-- ----------- CONTENT ----------- -->
+    <!--  TOGGLE BUTTON  -->
+    <mat-button-toggle-group name="" fxLayoutAlign="center stretch"
+                             #group="matButtonToggleGroup"
+                             [value]="selectedVal"
+                             (change)="onValChange(group.value)">
+      <mat-button-toggle fxFlex="grow" value="buy">BUY</mat-button-toggle>
+      <mat-button-toggle fxFlex="grow" value="sell">SELL</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <!--  TAB-GROUP  -->
+    <mat-tab-group mat-align-tabs="center" mat-stretch-tabs dynamicHeight>
+      <mat-tab label="Limit"></mat-tab>
+      <mat-tab label="Market"></mat-tab>
+      <mat-tab label="Stop-limit"></mat-tab>
+    </mat-tab-group>
+
+    <!--  AMOUNT WALLET  -->
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <div class="flexbox" fxLayoutGap="5px">
+        <mat-icon>account_balance_wallet</mat-icon>
+        <span class="upperCase"> Amount {{symbols.symbol2}}</span>
+      </div>
+
+      <!--  PRICE  -->
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" class="right-align" name="tradeAmountSymbol1" [(ngModel)]="symbols.symbol3"
+               (ngModelChange)="totalPrice()" required>
+        <span matPrefix></span>
+        <span matSuffix class="upperCase">&nbsp;&nbsp;&nbsp;{{symbols.symbol2}}</span>
+      </mat-form-field>
+
+      <!--  AMOUNT  -->
+      <mat-form-field appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" class="right-align" name="tradeAmountSymbol2" [(ngModel)]="trade.tradeAmountSymbol1"
+               (ngModelChange)="totalPrice()" required>
+        <span matPrefix></span>
+        <span matSuffix class="upperCase">&nbsp;&nbsp;&nbsp;{{symbols.symbol}}</span>
+      </mat-form-field>
+
+      <!--  PROGRESS BAR  -->
+      <section class="progressBar-section">
+        <mat-progress-bar
+          class="example-margin"
+          [color]="color"
+          [mode]="mode"
+          [value]="value"
+          [bufferValue]="bufferValue">
+        </mat-progress-bar>
+      </section>
+
+      <!--  TOTAL AMOUNT  -->
+      <mat-form-field appearance="fill">
+        <mat-label>Total</mat-label>
+        <input matInput type="number" class="right-align" name="amount" disabled>
+        <span matPrefix></span>
+        <span matSuffix class="upperCase">{{symbols.refresh}}&nbsp;&nbsp;&nbsp;{{symbols.symbol2}}</span>
+      </mat-form-field>
+
+    </mat-card-content>
+    <!-- ----------- /CONTENT ----------- -->
+
+    <!--  SELECT STRATEGY  -->
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field appearance="fill">
+        <mat-select name="selectStrategy"
+                    placeholder="Select your strategy"
+                    [(ngModel)]="strategy.strategyLabel"
+                    (valueChange)="onDisabled()">
+          <mat-option *ngFor="let strategy of strategies | async" [value]="strategy.strategyLabel">
+            {{strategy.strategyLabel}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-slide-toggle fxFlexAlign="center"
+                        [checked]="checked"
+                        [color]="slideColor"
+                        [disabled]="disabled"
+                        (change)="onSlideChange()">
+      </mat-slide-toggle>
+    </div>
+    <!-- ----------- ACTIONS ----------- -->
+    <mat-card-actions fxLayoutAlign="center" fxLayout="column" fxLayoutGap="30px">
+      <button mat-raised-button fxFill type="submit" [color]="buttonColor"
+              class="upperCase">{{buttonMessage}} {{symbols.symbol}}</button>
+    </mat-card-actions>
+    <!-- ----------- /ACTIONS ----------- -->
+  </form>
+
+  <div fxLayout="row" fxLayoutAlign="space-between " fxLayoutGap="10px">
+    <button mat-raised-button color="success" fxFlex="1 0 auto"
+            (click)="goToStrategy()">Find an ANGEL
+    </button>
+    <button mat-raised-button color="success" (click)="onCreate()">Become an ANGEL</button>
+  </div>
+</mat-card>

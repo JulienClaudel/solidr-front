@@ -1,0 +1,8 @@
+<mat-dialog-content>
+  <mat-label>Do you want to reactivate this account :</mat-label>
+  <p>{{userData.userEmail}}</p>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center stretch">
+  <button mat-raised-button color="warn" (click)="close()">Activate Account</button>
+  <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

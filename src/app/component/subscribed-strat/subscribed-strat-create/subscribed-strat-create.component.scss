@@ -1,0 +1,62 @@
+mat-card {
+  // max-width: 500px;
+  max-height: 800px;
+  max-width: 800px;
+}
+
+mat-card-header {
+  text-align: center;
+}
+
+mat-card-content {
+  margin-top: 15px !important;
+}
+
+mat-hint {
+  text-align: end;
+}
+
+textarea:focus :valid {
+  height: 30em;
+}
+
+button {
+  height: 150%;
+}
+
+// scroll input number disabled
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+::ng-deep .mat-dialog-content {
+  overflow-y: hidden !important;
+}
+
+.mat-flat-button:disabled {
+  background-color: #212121;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  color: white;
+  height: 43px;
+}
+
+::ng-deep .mat-input-wrapper {
+  width: 20px !important;
+}
+
+.alignContent {
+  text-align: center;
+}
+
+.alignRightContent {
+  text-align: end;
+}

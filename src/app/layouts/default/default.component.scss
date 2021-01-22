@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+mat-drawer {
+  width: 250px;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer-content {
+  padding: 20px;
+}
+/* .toggle{
+  display:block;
+}
+@media screen and (max-width: 750px) {
+  .toggle2{
+    display:none;
+  }
+} */

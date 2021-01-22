@@ -1,0 +1,15 @@
+<div class="flex-container" fxLayoutAlign="center stretch" fxLayout="column wrap">
+  <div fxLayout="row wrap" fxLayoutGap="100px grid" fxLayoutAlign="space-between stretch">
+    <app-tableprice fxFlex="1 0 auto"></app-tableprice>
+    <app-tableprice2 fxFlex="1 0 auto"></app-tableprice2>
+    <app-tableprice3 fxFlex="1 0 auto"></app-tableprice3>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="100px grid" fxLayoutAlign="center center">
+    <div *ngIf=paidFor>
+      <h2>Successfull payment</h2>
+    </div>
+  </div>
+</div>
+
+

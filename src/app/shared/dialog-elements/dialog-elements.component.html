@@ -1,0 +1,8 @@
+<mat-dialog-content>
+  <mat-label>Do you want to {{data.action}} this strategy:</mat-label>
+  <p>{{data.label.toUpperCase()}}</p>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center stretch">
+  <button mat-raised-button color="primary" (click)="onNoClick()">Discard</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="executeAction" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

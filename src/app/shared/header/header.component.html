@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button *ngIf="isLoggedIn" mat-icon-button (click)="toggleSideBar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <a routerLink="/" *ngIf="isLoggedIn" [routerLinkActive]="'is-active'"> <img src="assets/img/Logo/logoWhite.png" class="logo" alt="logo SolidR"> </a>
+    <a href="http://localhost:63343/front-page/index.html" *ngIf="!isLoggedIn" [routerLinkActive]="'is-active'"> <img src="assets/img/Logo/logoWhite.png" class="logo" alt="logo SolidR"> </a>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="20px">
+        <li>
+          <!-- User can see Register and login if he is not logged -->
+          <mat-card-actions *ngIf="!isLoggedIn">
+            <button mat-raised-button routerLink="login" [routerLinkActive]="'is-active'">Log In</button>
+            <button mat-raised-button routerLink="register" [routerLinkActive]="'is-active'">Register</button>
+          </mat-card-actions>
+          <!-- / User can see Register and login if he is not logged -->
+
+          <!-- User can see the profile button if he is logged -->
+          <mat-card-actions *ngIf="isLoggedIn">
+            <button mat-raised-button [matMenuTriggerFor]="profile" class="toolbar-icon toastBtn">{{username}}</button>
+            <mat-menu #profile="matMenu">
+              <button mat-menu-item type="submit" routerLink="detailsProfile" [routerLinkActive]="'is-active'">
+                <mat-icon>drag_indicator</mat-icon>
+                <span>My Profile</span>
+              </button>
+<!--              <button mat-menu-item>-->
+<!--                <mat-icon>account_balance_wallet</mat-icon>-->
+<!--                <span>My Wallet</span>-->
+<!--              </button>-->
+<!--              <button mat-menu-item>-->
+<!--                <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="primary">-->
+<!--                  notifications-->
+<!--                </mat-icon>-->
+<!--                <span>My Notifications</span>-->
+<!--              </button>-->
+              <button mat-menu-item type="submit" (click)="logout()">
+                <mat-icon>disabled_by_default</mat-icon>
+                <span>Log Out</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
+          <!-- / User can see the profile button if he is logged -->
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

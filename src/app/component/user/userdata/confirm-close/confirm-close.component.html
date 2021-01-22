@@ -1,0 +1,8 @@
+<mat-dialog-content>
+  <mat-label>Do you want to close this account :</mat-label>
+  <p>{{userData.userEmail}}</p>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center stretch">
+  <button mat-raised-button color="primary" (click)="close()">Close Account</button>
+  <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

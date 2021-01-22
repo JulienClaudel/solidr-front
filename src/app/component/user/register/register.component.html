@@ -1,0 +1,107 @@
+<div class="register" fxLayoutAlign="center">
+  <mat-card>
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card-header fxLayoutAlign="center">
+        <mat-card-title>Create a free account</mat-card-title>
+      </mat-card-header>
+      <mat-hint aria-live="polite" fxLayoutAlign="center"> Welcome to Solidr</mat-hint>
+      <br>
+      <mat-card-content fxLayout="column" fxLayoutAlign="center">
+
+        <!-- Username -->
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input name="username" matInput type="text" formControlName="username" maxlength="30"
+                 [(ngModel)]="form.username"
+                 tabindex="1">
+          <mat-error *ngIf="registerForm.controls['username'].hasError('required')">
+            Username is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['username'].hasError('minlength')">
+            Username is <strong>too short</strong>
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['username'].hasError('maxlength')">
+            Username is <strong>too long</strong>
+          </mat-error>
+        </mat-form-field>
+        <!-- /Username -->
+
+        <!-- Email -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input name="email" type="email" matInput formControlName="email" maxlength="60" placeholder="abc@example.com"
+                 [(ngModel)]="form.email" tabindex="2">
+          <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+            Not a <strong>valid</strong> email
+          </mat-error>
+        </mat-form-field>
+        <!-- Email -->
+
+        <!-- Password -->
+        <mat-form-field appearance="fill" style="width: 100%" [color]="passwordComponent.color">
+          <mat-label>Enter your password</mat-label>
+          <!-- Eye button -->
+          <mat-pass-toggle-visibility matSuffix (click)="hideP = !hideP"></mat-pass-toggle-visibility>
+          <mat-hint align="end" aria-live="polite">
+            {{password.value.length}} / {{passwordComponent.max}}
+          </mat-hint>
+          <input matInput name="password" #password formControlName="password" [type]="hideP ? 'password' : 'text'"
+                 [(ngModel)]="form.password" maxlength="30" tabindex="3">
+          <mat-error *ngIf="registerForm.controls['password'].hasError('required', 'password')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-password-strength #passwordComponent [password]="password.value"></mat-password-strength>
+        <br>
+
+        <!-- Info strength password-->
+        <mat-slide-toggle (click)="toggle()" type="button">Show Details</mat-slide-toggle>
+        <br>
+        <mat-password-strength-info *ngIf="show" [passwordComponent]="passwordComponent"></mat-password-strength-info>
+        <!-- /Password -->
+
+        <!-- Confirm Password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Confirmation password</mat-label>
+          <mat-pass-toggle-visibility matSuffix (click)="hideMP = !hideMP"></mat-pass-toggle-visibility>
+          <input name="matchingPassword" matInput maxlength="30" formControlName="matchingPassword"
+                 [type]="hideMP ? 'password' : 'text'"
+                 [(ngModel)]="form.matchingPassword" [errorStateMatcher]="matcher" tabindex="4">
+          <mat-error *ngIf="registerForm.hasError('notSame')">
+            Passwords don't match
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox [formControl]="terms" tabindex="5">
+          <mat-hint>I have read and agree to the Terms of Service. <span>Solidr's Terms</span></mat-hint>
+        </mat-checkbox>
+
+        <mat-error *ngIf="terms.invalid && terms.dirty">
+          I am over 18 age, and I agree to Solidr's Terms
+        </mat-error>
+        <mat-checkbox [formControl]="using2FA" tabindex="6">
+          <mat-hint>Enable Two-factor authentication ( Optional )</mat-hint>
+        </mat-checkbox>
+      </mat-card-content>
+      <!-- Confirm Password -->
+
+      <div fxLayoutAlign="center" appRecaptchaRegister *ngIf="registerForm.valid" (recaptchaSuccess)="onRecaptchaSuccess($event)"></div>
+      <br>
+      <mat-card-actions fxLayoutAlign="center">
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="passwordComponent.strength != 100 || !captcha || terms.invalid || registerForm.invalid"
+                tabindex="7">Create Account
+        </button>
+      </mat-card-actions>
+      <mat-hint fxLayoutAlign="center"><a href="javascript:void(0);" (click)="connect()">Already an account ?</a>
+      </mat-hint>
+
+      <mat-error *ngIf="isSignUpFailed">
+        Signup failed !<br/> {{ errorMessage }}
+      </mat-error>
+    </form>
+  </mat-card>
+</div>

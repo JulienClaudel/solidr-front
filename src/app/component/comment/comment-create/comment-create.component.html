@@ -1,0 +1,37 @@
+<mat-card class="flex-container" layout-xs="column" layout="row">
+  <form #createComment="ngForm" (ngSubmit)="onSubmit(createComment)">
+    <!-- ----------- HEADER ----------- -->
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Add a comment</mat-card-title>
+    </mat-card-header>
+    <!-- ----------- /HEADER ----------- -->
+    <mat-divider></mat-divider>
+    <!-- ----------- CONTENT ----------- -->
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <mat-form-field appearance="fill">
+        <mat-label name="commentDescription"></mat-label>
+        <textarea matInput type="text" name="commentDescription"
+                  [(ngModel)]="comment.commentDescription"
+                  autocomplete="off"
+                  maxlength="1000"
+                  minlength="3"
+                  #descriptionInput="ngModel"></textarea>
+        <mat-int align="end">{{ descriptionInput.value?.length || 0 }}/1 000</mat-int>
+        <mat-error *ngIf="descriptionInput.hasError('required')">Field must not be empty.</mat-error>
+        <mat-error *ngIf="descriptionInput.hasError('maxlength')">Has to be less than 1 000 characters long.</mat-error>
+        <mat-error *ngIf="descriptionInput.hasError('minlength')">Has to be more than 3 characters long.</mat-error>
+      </mat-form-field>
+
+
+      <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
+                       (ratingUpdated)="onRatingChanged($event)">
+      </app-star-rating>
+    </mat-card-content>
+    <!-- ----------- /CONTENT ----------- -->
+    <!-- ----------- ACTIONS ----------- -->
+    <mat-card-actions>
+      <button mat-raised-button type="submit" color="primary">Add</button>
+    </mat-card-actions>
+    <!-- ----------- /ACTIONS ----------- -->
+  </form>
+</mat-card>

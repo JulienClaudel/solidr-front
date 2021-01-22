@@ -1,0 +1,13 @@
+<mat-card-header fxLayoutAlign="center">
+  <mat-card-title>Disable 2FA Authentication? ?</mat-card-title>
+</mat-card-header>
+<br>
+<mat-card-content fxLayout="column" fxLayoutAlign="center">
+  <mat-label fxLayoutAlign="center">Are you sure you want to <strong> disable </strong> two-factor authentication? ?</mat-label>
+  <mat-label fxLayoutAlign="center">Your account will be <strong> less secure </strong> and you risk getting hacked</mat-label>
+  <br>
+  <mat-card-actions fxLayoutAlign="center">
+    <button type="submit" color="warn" mat-raised-button (click)="confirmDeactivate()">Deactivate 2FA</button>
+    <button type="submit" color="primary" mat-raised-button (click)="onClose()">Cancel</button>
+  </mat-card-actions>
+</mat-card-content>

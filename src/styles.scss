@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~ngx-toastr/toastr";
+
+html, body {
+  font-family: Roboto, sans-serif;
+  display: block;
+  padding: 0px;
+  margin: 0px;
+  background: #303030;
+  height: 100%;
+}
+
+
+/////////////////////////////////////////////////////////
+// Custom Toast pop-up
+.toast-container .ngx-toastr {
+  position: relative;
+  margin-top: 70px !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+  color: #fff;
+  border-image-slice: 20 !important;
+}
+
+.toast-success {
+  background-color: #111111 !important;
+}
+
+.toast-error {
+  color: crimson !important;
+  background-color: #111111 !important;
+}
+
+/////////////////////////////////////////////////////////
+// resize of select boxes
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 0 0 0 !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  // padding-top: 5px !important;
+}
+

@@ -1,0 +1,52 @@
+<mat-card class="flex-container">
+
+
+  <!-- ----------- CONTENT ----------- -->
+  <!--  TOGGLE BUTTON  -->
+  <mat-button-toggle-group name="" fxLayoutAlign="center stretch"
+                           #group="matButtonToggleGroup"
+                           [value]="selectedVal"
+                           (change)="onValChange(group.value)">
+    <mat-button-toggle fxFlex="grow" value="followers">FOLLOWERS</mat-button-toggle>
+    <mat-button-toggle fxFlex="grow" value="angels">ANGELS</mat-button-toggle>
+  </mat-button-toggle-group>
+
+
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" [dataSource]="subscribedListSource" matSort aria-label="Elements"
+           fxFill>
+
+      <!-- User Column -->
+      <ng-container matColumnDef="{{column1}}" *ngIf="column1 == 'userEmail'; else other">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{colname}}</th>
+        <td mat-cell *matCellDef="let row"> {{row.userUsername}}</td>
+      </ng-container>
+      <ng-template #other>
+        <ng-container matColumnDef="{{column1}}">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{colname}}</th>
+          <td mat-cell *matCellDef="let row"> {{row.strategyLabel}}</td>
+        </ng-container>
+      </ng-template>
+
+      <!-- Affect1 Column -->
+      <ng-container matColumnDef="amountAffect1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount</th>
+        <td mat-cell *matCellDef="let row"> {{row.amountAffect1}}  {{row.symbolAffect1}}</td>
+      </ng-container>
+
+      <!-- Affect2 Column -->
+      <ng-container matColumnDef="amountAffect2">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount</th>
+        <td mat-cell *matCellDef="let row"> {{row.amountAffect2}}  {{row.symbolAffect2}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+
+</mat-card>

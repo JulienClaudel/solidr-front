@@ -1,0 +1,75 @@
+<!-- List of all users -->
+<mat-card class="flex-container user">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. test" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" [dataSource]="usersListSource" matSort aria-label="Elements" fxFill>
+
+      <!-- Details Column -->
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Details</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="showDetails(row.userEmail)">
+            <mat-icon>info</mat-icon>
+          </button></td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="userEmail">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+        <td mat-cell *matCellDef="let row"> {{row.userEmail}}</td>
+      </ng-container>
+
+      <!-- Username Column -->
+      <ng-container matColumnDef="userUsername">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Username</th>
+        <td mat-cell *matCellDef="let row"> {{row.userUsername}}</td>
+      </ng-container>
+
+      <!-- First name Column -->
+      <ng-container matColumnDef="userFirstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First name</th>
+        <td mat-cell *matCellDef="let row"> {{row.userFirstname}} </td>
+      </ng-container>
+
+      <!-- Last name Column -->
+      <ng-container matColumnDef="userLastname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name</th>
+        <td mat-cell *matCellDef="let row"> {{row.userLastname}} </td>
+      </ng-container>
+
+      <!-- Signin Column -->
+      <ng-container matColumnDef="userSignin">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Signin</th>
+        <td mat-cell *matCellDef="let row"> {{row.userSignin  | date: 'dd-MM-yyy'}} </td>
+      </ng-container>
+
+      <!-- Gaz Column -->
+      <ng-container matColumnDef="userGaz">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gaz</th>
+        <td mat-cell *matCellDef="let row"> {{row.userGaz}} </td>
+      </ng-container>
+
+      <!-- Edit Column-->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="onEdit(row.userEmail)">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>

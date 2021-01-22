@@ -1,0 +1,72 @@
+<mat-card class="strategy-details-card" layout-xs="column" layout="row">
+  <!-- ----------- HEADER ----------- -->
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between start">
+    <!--  AVATAR  -->
+    <mat-icon mat-card-avatar color="primary">api</mat-icon>
+    <div fxFlex="grow">
+      <!--  LEFT INFORMATIONS  -->
+      <mat-card-title-group fxFlex="auto">
+        <mat-card-title>{{strategy.strategyLabel}}</mat-card-title>
+        <mat-card-subtitle>{{strategy.userEmail}}</mat-card-subtitle>
+      </mat-card-title-group>
+      <!--  RIGHT INFORMATIONS  -->
+      <mat-card-title-group class="alignHeaderRightText">
+        <mat-card-title fxFlexAlign="end" class="symbol">{{strategy.strategySymbol1}}
+          /{{strategy.strategySymbol2}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{follower}} followers</mat-card-subtitle> -->
+        <mat-card-subtitle>{{strategy.strategyProfitability}}% last month</mat-card-subtitle>
+      </mat-card-title-group>
+    </div>
+  </mat-card-header>
+  <!-- ----------- /HEADER ----------- -->
+
+  <!-- ----------- CONTENT ----------- -->
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutAlign="space-between">
+      <img mat-card-image fxFlex="grow" alt="strategy image"
+           src="../../../../assets/img/strategy/Img_{{strategy.strategyIcon}}.jpg"
+           id="myPicture">
+      <div fxFlex="grow" fxFlexAlign="stretch" class="alignDescriptionText">
+        <p *ngIf="strategy.strategyDescription.length>500; else entireText">
+          {{strategy.strategyDescription.substring(1, 500)}}...
+        </p>
+        <ng-template #entireText>{{strategy.strategyDescription}}</ng-template>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <p>Creation date: {{strategy.strategyCreationDate | date: 'dd-MM-yyy'}}</p>
+        <p>Last update: {{strategy.strategyUpdateDate | date: 'dd-MM-yyy'}}</p>
+      </div>
+    </div>
+  </mat-card-content>
+  <!-- ----------- /CONTENT ----------- -->
+
+  <section *ngIf="isUser">
+    <mat-divider></mat-divider>
+
+    <!-- ----------- ACTIONS ----------- -->
+    <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+      <button *ngIf="!isAdmin && !isExpert && !isMember && !isStaff" mat-raised-button color="primary"
+              (click)="beUser(this.strategy.userEmail)" fxFill>
+        To see more detail, please validate your account
+      </button>
+      <section *ngIf="isMember" fxLayoutAlign="center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" (click)="becomeFollower(strategy)">Follow this ANGEL
+        </button>
+        <button mat-mini-fab color="primary" (click)="showDetails(strategy.strategyId)">
+          <mat-icon>info</mat-icon>
+        </button>
+        <section *ngIf="isExpert" fxLayoutAlign="center" fxLayoutGap="10px">
+          <button mat-mini-fab color="primary" (click)="onEdit(strategy)">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </section>
+      </section>
+    </mat-card-actions>
+    <!-- ----------- /ACTIONS ----------- -->
+  </section>
+
+
+</mat-card>

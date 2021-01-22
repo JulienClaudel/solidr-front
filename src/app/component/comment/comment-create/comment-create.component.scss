@@ -1,0 +1,40 @@
+textarea {
+  min-height: 10em;
+}
+
+mat-divider {
+  position: initial !important;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+:host {
+  ::ng-deep.mat-pseudo-checkbox {
+    display: none !important;
+  }
+}
+
+input[type="checkbox"]:checked ~ .toggle-button-text {
+  background-color: transparent;
+}
+
+:host {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 50px;
+}
+
+mat-button-toggle-group {
+  background-color: transparent;
+  border: transparent;
+}
+
+.toggle-button-text-on,
+.toggle-button-text-off {
+  line-height: 0px !important;
+}
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 0px !important;
+}

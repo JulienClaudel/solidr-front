@@ -1,0 +1,59 @@
+<!-- Card with details of the chosen user -->
+<mat-grid-list cols="2">
+  <!-- Follow this angel -->
+  <div class="grid-container">
+    <mat-grid-tile [rowspan]="2">
+      <mat-card class="user-details-card">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between start">
+          <mat-icon mat-card-avatar color="primary">api</mat-icon>
+          <mat-card-title-group fxFlex="auto">
+            <mat-card-title>{{userData.userUsername}}</mat-card-title>
+            <mat-card-subtitle>{{userData.userEmail}}</mat-card-subtitle>
+          </mat-card-title-group>
+          <mat-card-title-group fxFlex="auto">
+            <mat-card-title>Creation date : {{userData.userSignin | date: 'dd-MM-yyy'}}</mat-card-title>
+            <mat-card-subtitle>{{userData.userGaz}} Gaz</mat-card-subtitle>
+          </mat-card-title-group>
+          <mat-card-title-group fxFlex="auto">
+            <button mat-mini-fab color="primary" (click)="onEdit(userData)">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary">
+              <mat-slide-toggle mat-mini-fab [checked]="valid" (click)="activate()" color="warn"></mat-slide-toggle>
+            </button>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <p>First name : {{userData.userFirstname}}</p>
+            <p>Last name : {{userData.userLastname}}</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <p>Birthdate : {{userData.userBirthdate | date: 'dd-MM-yyy'}}</p>
+            <p>Link Contact : {{userData.userLinkContact}}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-content>
+          <div fxFlex="grow" fxFlexAlign="stretch" class="alignDescriptionText" fxFill>
+            <span>Description : {{userData.userDescription}}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-content>
+          <div fxFlex="row" fxFlexAlign="space-between">
+            <span>Google Authenticator : {{userData.using2FA}}</span>
+          </div>
+        </mat-card-content>
+        <section>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="backToUsers()">
+              Back to Users
+            </button>
+          </mat-card-actions>
+        </section>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>

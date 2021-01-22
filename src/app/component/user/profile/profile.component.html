@@ -1,0 +1,92 @@
+<mat-grid-list *ngIf="isAdmin || isStaff" cols="1">
+  <!-- Follow this angel -->
+  <div class="grid-container">
+    <mat-grid-tile [rowspan]="2">
+      <mat-card class="admin-card">
+        <mat-tab-group *ngIf="isAdmin" fxFill>
+          <mat-tab label="Users">
+            <app-userdata fxFill></app-userdata>
+          </mat-tab>
+          <mat-tab label="Susbcribers">
+            <app-subscribed-strategy fxFill></app-subscribed-strategy>
+          </mat-tab>
+          <mat-tab label="Subscribed users">
+            <app-trade-list fxFill></app-trade-list>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
+
+<mat-grid-list cols="2" rowHeight="300px">
+  <!-- Follow this angel -->
+  <div class="grid-container">
+    <!-- Wallet -->
+    <mat-grid-tile *ngIf="!isAdmin && !isStaff" [colspan]="1" [rowspan]="2">
+      <mat-card class="profile-card">
+        <mat-card-header>
+          <mat-card-title>
+            Your Profile
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-profile-details></app-profile-details>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card *ngIf="!isUser && !isAdmin && !isStaff" class="wallet-card">
+        <mat-card-header>
+          <mat-card-title>
+            Your wallet
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="wallet-card-content">
+          <div id="containerwallet">
+            <div class="walletarea">
+              <app-wallet></app-wallet>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+  <div class="grid-container">
+    <!-- Wallet -->
+    <mat-grid-tile *ngIf="!isUser && !isAdmin && !isStaff" [colspan]="1" [rowspan]="2">
+      <mat-card class="profile-card">
+        <mat-card-header>
+          <mat-card-title>
+            Strategies
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-subscribed-strat-container></app-subscribed-strat-container>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!isUser && !isAdmin && !isStaff" [colspan]="1" [rowspan]="2">
+      <mat-card class="profile-card">
+        <mat-card-header>
+          <mat-card-title>
+            Subscribed Strategies
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-subscribed-strategy></app-subscribed-strategy>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
+<!-- Wallet -->
+

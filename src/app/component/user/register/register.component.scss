@@ -1,0 +1,24 @@
+mat-card {
+  width: 450px;
+}
+
+mat-hint {
+  text-align: end;
+}
+
+a {
+  color: white;
+}
+
+
+textarea:invalid {
+  height: 2em;
+}
+
+textarea:focus {
+  height: 10em;
+}
+
+span {
+  color: darkturquoise;
+}

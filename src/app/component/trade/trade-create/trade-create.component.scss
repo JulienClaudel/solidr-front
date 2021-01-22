@@ -1,0 +1,56 @@
+.flexbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/***** INPUT *****/
+.right-align {
+  text-align: right;
+  -moz-appearance: textfield;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+/***** PROGRESS BAR *****/
+.progressBar-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/***** TOGGLE-GROUP *****/
+.mat-button-toggle-group {
+  margin-bottom: 20px;
+}
+
+/***** TAB-GROUP *****/
+mat-tab-group {
+  display: flex;
+  margin-bottom: 20px;
+  align-content: stretch;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.mat-tab-label {
+  width: 50%;
+}
+
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active {
+  min-width: 0 !important;
+  padding: 3px !important;
+  margin: 3px !important;
+}
+
+.mat-card-actions {
+  margin: 3px;
+}
+
+.upperCase {
+  text-transform: uppercase;
+}

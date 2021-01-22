@@ -1,0 +1,38 @@
+<mat-card>
+  <form #createStrat="ngForm">
+    <!-- pairs -->
+    <mat-form-field appearance="fill">
+      <mat-label>Pairs</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let pair of pairs" [value]="pair.value">
+          {{pair.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- /pairs -->
+    <!-- minutes -->
+    <mat-form-field appearance="fill">
+      <mat-label>m</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let minute of minutes" [value]="minute.value">
+          {{minute.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- /minutes -->
+    <!-- hours -->
+    <mat-form-field appearance="fill">
+      <mat-label>h</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let hour of hours" [value]="hour.value">
+          {{hour.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- /hours -->
+    <div class="containerChart">
+      <div id="chart"></div>
+    </div>
+  </form>
+</mat-card>
+

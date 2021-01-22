@@ -1,0 +1,11 @@
+<div class="flex-container" fxLayout="column" fxLayoutGap="30px" fxLayoutAlign="center">
+  <button mat-raised-button class="becomeAngel" fxFlexAlign="start" color="accent" *ngIf="isMember"
+          (click)="onCreate()">Become an ANGEL
+  </button>
+
+  <div class="list" fxLayout="row wrap" fxLayout.xs="column"
+       fxLayoutGap="grid" fxLayoutGap.xs="30px"
+       fxLayoutAlign="space-between stretch" fxFill>
+    <app-strategy-list *ngFor="let strategy of strategies |async" [strategy]="strategy"></app-strategy-list>
+  </div>
+</div>

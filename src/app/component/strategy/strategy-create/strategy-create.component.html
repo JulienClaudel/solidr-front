@@ -1,0 +1,127 @@
+<mat-card class="strategy-create-card" layout-xs="column" layout="row">
+  <form #createStrat="ngForm" (ngSubmit)="onSubmit(createStrat)">
+    <!-- ----------- HEADER ----------- -->
+    <mat-card-header fxLayoutAlign="center">
+      <mat-card-title>Create my Strategy</mat-card-title>
+      <button mat-icon-button class="close no-hover-effect" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+    <!-- ----------- /HEADER ----------- -->
+    <mat-divider></mat-divider>
+    <!-- ----------- CONTENT ----------- -->
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <!--  LABEL  -->
+      <mat-form-field appearance="fill">
+        <mat-label name="strategyLabel">Label</mat-label>
+        <input matInput type="text" name="strategyLabel"
+               [(ngModel)]="strategy.strategyLabel"
+               maxlength="50"
+               minlength="3"
+               required
+               #labelInput="ngModel">
+        <mat-hint align="end">{{ labelInput.value?.length || 0}}/50</mat-hint>
+        <mat-error *ngIf="labelInput.hasError('required')">Field must not be empty.</mat-error>
+        <mat-error *ngIf="labelInput.hasError('maxlength')">Has to be less than 50 characters long.</mat-error>
+        <mat-error *ngIf="labelInput.hasError('minlength')">Has to be more than 3 characters long.</mat-error>
+      </mat-form-field>
+
+      <!--  USER EMAIL LINK -->
+      <mat-form-field appearance="fill" style="display: none">
+        <mat-label name="userEmail">Email link</mat-label>
+        <input matInput type="email" name="userEmail" [(ngModel)]="currentUser.email" disabled
+               #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutGap="10px">
+        <!--  SELECT PICTURE  -->
+        <mat-form-field appearance="fill">
+          <mat-label name="strategyIcon">Choose a picture</mat-label>
+          <mat-select name="strategyIcon"
+                      [(ngModel)]="strategy.strategyIcon"
+                      #iconInput="ngModel">
+            <mat-option [value]="">None</mat-option>
+            <mat-option *ngFor="let picture of pictures | async" [value]="picture.informationCode">
+              {{picture.informationDescription}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="iconInput.hasError('required')">Select a symbol.</mat-error>
+        </mat-form-field>
+
+        <!--  PRIME  -->
+        <mat-form-field appearance="fill">
+          <mat-label name="prime">Prime</mat-label>
+          <input matInput type="number" name="strategyPrime" [(ngModel)]="strategy.strategyPrime" required
+                 #primeInput="ngModel">
+          <mat-hint align="end">Only numbers allowed.</mat-hint>
+          <mat-error *ngIf="primeInput.hasError('required')">Field must not be empty.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- SHOW PICTURE SELECTED -->
+      <img mat-card-image fxFlexAlign="center" fxFill *ngIf="strategy.strategyIcon != null; else hiddenPicture"
+           src="../../../../assets/img/strategy/Img_{{strategy.strategyIcon}}.jpg" id="selectPicture">
+      <ng-template #hiddenPicture></ng-template>
+
+      <!--  SELECT SYMBOL  -->
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch">
+        <!--  SYMBOL1  -->
+        <mat-form-field appearance="fill">
+          <mat-label name="strategySymbol1">Symbol</mat-label>
+          <mat-select name="strategySymbol1"
+                      [(ngModel)]="strategy.strategySymbol1"
+                      required
+                      #symbol1Input="ngModel"
+                      (ngModelChange)="onSelectionChangeSymbol1()">
+            <mat-option [value]=""></mat-option>
+            <mat-option *ngFor="let symbol of symbols | async" [value]="symbol.informationCode">
+              {{symbol.informationCode}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="symbol1Input.hasError('required')">Select a symbol.</mat-error>
+        </mat-form-field>
+        <!--  SYMBOL2  -->
+        <mat-form-field appearance="fill">
+          <mat-label name="strategySymbol2">Symbol</mat-label>
+          <mat-select name="strategySymbol2"
+                      [(ngModel)]="strategy.strategySymbol2"
+                      required
+                      #symbol2Input="ngModel"
+                      (ngModelChange)="onSelectionChangeSymbol2()">
+            <mat-option [value]=""></mat-option>
+            <mat-option *ngFor="let symbol2 of symbols2 | async" [value]="symbol2.informationCode">
+              {{symbol2.informationCode}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="symbol2Input.hasError('required')">Select a symbol.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--  DESCRIPTION  -->
+      <mat-form-field appearance="fill">
+        <mat-label name="strategyDescription">Description</mat-label>
+        <textarea matInput type="text" name="strategyDescription"
+                  [(ngModel)]="strategy.strategyDescription"
+                  maxlength="1000"
+                  minlength="3"
+                  required
+                  #descriptionInput="ngModel">
+        </textarea>
+        <mat-hint align="end">{{ descriptionInput.value?.length || 0 }}/1 000</mat-hint>
+        <mat-error *ngIf="descriptionInput.hasError('required')">Field must not be empty.</mat-error>
+        <mat-error *ngIf="descriptionInput.hasError('maxlength')">Has to be less than 1 000 characters long.</mat-error>
+        <mat-error *ngIf="descriptionInput.hasError('minlength')">Has to be more than 3 characters long.</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <!-- ----------- /CONTENT ----------- -->
+
+    <!-- ----------- ACTIONS ----------- -->
+    <mat-card-actions fxLayoutAlign="center">
+      <button type="submit" color="accent" mat-raised-button [disabled]="createStrat.invalid">Create</button>
+      <button type="submit" color="primary" mat-raised-button (click)="onClose()">Cancel</button>
+    </mat-card-actions>
+    <!-- ----------- /ACTIONS ----------- -->
+  </form>
+</mat-card>
+

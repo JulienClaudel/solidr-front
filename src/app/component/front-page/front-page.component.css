@@ -1,0 +1,46 @@
+/* @importurl('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+*/
+
+*{
+  border:0;
+  padding:0;
+  margin:0;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-family: "Birch Std";
+  width: 100%;
+  height: 100vh;
+}
+
+h2{
+  font-size: 60px;
+  background: white;
+  padding: 8px 24px;
+  border-radius: 16px;
+}
+
+.menu1{
+  height:800px;
+  background-image:url(src/assets/img/front-page/blur-1853262.jpg);
+  background-size:cover;
+}
+.menu2{
+  height:400px;
+  background: white;
+  background-size:cover;
+}
+.menu3{
+  height:400px;
+  background-image:url(src/assets/img/front-page/trade3graph.png);
+  background-size:cover;
+}
+.menu4{
+  height:400px;
+  background-image:url(src/assets/img/front-page/trade2Graph.png);
+  background-size:cover;
+}
